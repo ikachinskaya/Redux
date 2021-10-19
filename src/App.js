@@ -1,29 +1,15 @@
 import { connect } from "react-redux";
-
+import * as actionCreators from "./actions/index";
 function App(props) {
   //console.log(props);
   const { count, step, dispatch } = props;
 
-  const increment = () => {
-    const action = {
-      type: "increment",
-    };
-    dispatch(action);
-  };
+  const increment = () => dispatch(actionCreators.increment());
 
-  const decrement = () => {
-    const action = {
-      type: "decrement",
-    };
-    dispatch(action);
-  };
+  const decrement = () => dispatch(actionCreators.decrement());
 
-  const changeStep = (event) => {
-    const action = {
-      type: "setStep",
-      newStep: Number(event.target.value),
-    };
-    dispatch(action);
+  const changeStep = ({ target: { value } }) => {
+    dispatch(actionCreators.setStep(Number(value)));
   };
 
   return (
@@ -36,13 +22,10 @@ function App(props) {
   );
 }
 
-//принимает состояние, возвращает состоzние, к-рое д.б. подключено к этому компоненту
+//принимает состояние, возвращает состояние, к-рое д.б. подключено к этому компоненту
 //можно отсечь ненужное, взять только нужное
 function mapStateToProps(state) {
-  return {
-    count: state.count,
-    step: state.step,
-  };
+  return state;
 }
 //============================================
 //соединяет компонент с хранилищем
