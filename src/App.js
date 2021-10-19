@@ -1,23 +1,18 @@
 import { connect } from "react-redux";
 import * as actionCreators from "./actions/index";
 function App(props) {
-  //console.log(props);
-  const { count, step, dispatch } = props;
+  console.log(props);
+  const { count, step, incrementAction, decrementAction, setStepAction } =
+    props;
 
-  const increment = () => dispatch(actionCreators.increment());
-
-  const decrement = () => dispatch(actionCreators.decrement());
-
-  const changeStep = ({ target: { value } }) => {
-    dispatch(actionCreators.setStep(Number(value)));
-  };
+  const changeStep = ({ target: { value } }) => setStepAction(Number(value));
 
   return (
     <div>
       <h1>Counter is: {count} </h1>
       <input vallue={step} onChange={changeStep} />
-      <button onClick={decrement}>Отнять</button>
-      <button onClick={increment}>Добавить</button>
+      <button onClick={decrementAction}>Отнять</button>
+      <button onClick={incrementAction}>Добавить</button>
     </div>
   );
 }
@@ -27,22 +22,17 @@ function App(props) {
 function mapStateToProps(state) {
   return state;
 }
-//============================================
-//соединяет компонент с хранилищем
-//const withProps = connect(mapStateToProps);
-//============================================
 
-//новый компонент с пропсами
-//компонент высшего порядка
-//вернет новый компонент
-//const AppWithProps = withProps(App);
 
-//============================================
-//export default AppWithProps;
-//============================================
-
+function mapDispatchToProps(dispatch) {
+  return {
+    incrementAction: () => dispatch(actionCreators.increment()),
+    decrementAction: () => dispatch(actionCreators.decrement()),
+    setStepAction: (newStep) => dispatch(actionCreators.setStep(newStep)),
+  };
+}
 //с помощью каррирования
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 /* 
 connect соединяет компонент с хранилищем 
