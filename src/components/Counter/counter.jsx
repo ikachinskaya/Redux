@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import * as actionCreators from "./../../actions";
+import * as actionCreators from "./../../actions/counterCreators";
 function App(props) {
   console.log(props);
   const { count, step, incrementAction, decrementAction, setStepAction } =
@@ -20,7 +20,10 @@ function App(props) {
 //принимает состояние, возвращает состояние, к-рое д.б. подключено к этому компоненту
 //можно отсечь ненужное, взять только нужное
 function mapStateToProps(state) {
-  return state;
+  const {
+    counter: { step, count },
+  } = state;
+  return { step, count };
 }
 
 function mapDispatchToProps(dispatch) {
