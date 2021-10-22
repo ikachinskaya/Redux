@@ -8,6 +8,11 @@ const ACTION_TYPES = {
   CREATE_TASK: "CREATE_TASK",
   UPDATE_TASK: "UPDATE_TASK",
   DELETE_TASK: "DELETE_TASK",
+
+  //user
+  CREATE_USER_REQUEST: "CREATE_USER_REQUEST", //запрос на создание
+  CREATE_USER_SUCCES: "CREATE_USER_SUCCES",   //успешный запрос
+  CREATE_USER_ERROR: "CREATE_USER_ERROR",     //ошибка
 };
 
 export default ACTION_TYPES;
